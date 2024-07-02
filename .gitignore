@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+# Ignore dist directory
+dist/
+
 # testing
 /coverage
 
