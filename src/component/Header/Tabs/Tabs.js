@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation  } from 'react-router-dom';
 import User from '../../UserInfo/User';
 import Platter from '../../PlatterInfo/Platter';
 
@@ -40,9 +40,22 @@ function a11yProps(index) {
 export default function BasicTabs() {
   const [value, setValue] = useState(0);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const path = location.pathname;
+    if (path === '/user-details') setValue(0);
+    else if (path === '/platter-details') setValue(1);
+    else if (path === '/daily-update-form') setValue(2);
+    else if (path === '/daily-update-info') setValue(3);
+  }, [location.pathname]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    if (newValue === 0) navigate('/user-details');
+    else if (newValue === 1) navigate('/platter-details');
+    else if (newValue === 2) navigate('/daily-update-form');
+    else if (newValue === 3) navigate('/daily-update-info');
   };
 
   const handleLogout = () => {
